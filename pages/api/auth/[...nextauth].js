@@ -44,6 +44,9 @@ export const authOptions = {
       },
     }),
   ],
+};
+
+const additionalOptions = {
   adapter: MongoDBAdapter(clientPromise),
   session: {
     // Choose how you want to save the user session.
@@ -70,4 +73,6 @@ export const authOptions = {
   },
 };
 
-export default NextAuth(authOptions);
+const combinedOptions = { ...authOptions, ...additionalOptions };
+
+export default NextAuth(combinedOptions);
