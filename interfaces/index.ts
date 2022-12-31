@@ -4,7 +4,18 @@
 //
 // import { User } from 'path/to/interfaces';
 
+export type PotentialGhoul = {
+  name: string;
+  age: number;
+  isAlive: boolean;
+  points?: number;
+};
+
 export type User = {
-  id: number
-  name: string
-}
+  id: number;
+  name: string;
+  email: string;
+  username: string;
+  password: string;
+  potentialGhoul: PotentialGhoul[];
+};
