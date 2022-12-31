@@ -48,6 +48,15 @@ const RegisterPage = () => {
               <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
                 Register your account
               </h2>
+              <p className="mt-2 text-gray-600 text-xl">
+                Or{" "}
+                <a
+                  href="/register"
+                  className="text-indigo-600 hover:text-indigo-500 font-semibold"
+                >
+                  Register your account here...
+                </a>
+              </p>
             </div>
 
             <div className="mt-8">
