@@ -20,8 +20,8 @@ export const authOptions = {
 
         const user = await users.findOne({
           $or: [
-            { username: credentials.username },
-            { email: credentials.username },
+            { username: credentials.username.toLowerCase() },
+            { email: credentials.username.toLowerCase() },
           ],
         });
 

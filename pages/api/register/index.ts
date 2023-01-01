@@ -36,21 +36,28 @@ export default async function handler(
   const user = await users.findOne(filter);
 
   if (user) {
-    return res.status(400).json({ message: "User already exists" });
+    return res
+      .status(400)
+      .json({ message: "User already exists, try logging in." });
   }
 
-  // hash password
-  /* Hashing the password. */
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const result = await users.insertOne({
-    name,
-    username,
-    email,
-    password: hashedPassword,
-    potentialGhoul: [],
-    createdAt: new Date(),
-  });
+  await users
+    .insertOne({
+      name,
+      username,
+      email,
+      password: hashedPassword,
+      potentialGhoul: [],
+      createdAt: new Date(),
+    })
+    .catch((err) => {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: err.message || "Something went wrong" });
+    });
 
   res.status(201).json({ message: "User created" });
 }

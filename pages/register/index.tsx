@@ -34,9 +34,8 @@ const RegisterPage = () => {
         password,
         key,
       });
-      console.log(res.data);
 
-      if (res.data.status === "success") {
+      if (res.status === 201) {
         alert("Registration successful");
         setDisabled(true);
         router.push("/signin");
