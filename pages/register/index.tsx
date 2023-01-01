@@ -1,10 +1,16 @@
 import axios from "axios";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { useSession, signOut } from "next-auth/react";
+import clsx from "clsx";
 
 const RegisterPage = () => {
   const { data: session, status } = useSession();
+
+  const [disabled, setDisabled] = useState(false);
+
   const router = useRouter();
+
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -32,7 +38,7 @@ const RegisterPage = () => {
 
       if (res.data.status === "success") {
         alert("Registration successful");
-
+        setDisabled(true);
         router.push("/signin");
       }
     } catch (error) {
@@ -181,7 +187,11 @@ const RegisterPage = () => {
                   <div>
                     <button
                       type="submit"
-                      className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      disabled={disabled}
+                      className={clsx(
+                        "flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2",
+                        disabled && "opacity-50 cursor-not-allowed"
+                      )}
                     >
                       Register
                     </button>

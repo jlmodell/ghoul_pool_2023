@@ -26,9 +26,14 @@ export default async function handler(
   const db = client.db("next-auth");
   const users = db.collection("users");
 
-  const user = await users.findOne({
-    $or: [{ username }, { email }],
-  });
+  const filter = {
+    $or: [
+      { username: (username as string).toLowerCase() },
+      { email: (email as string).toLowerCase() },
+    ],
+  };
+
+  const user = await users.findOne(filter);
 
   if (user) {
     return res.status(400).json({ message: "User already exists" });
