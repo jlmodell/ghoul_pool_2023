@@ -12,7 +12,7 @@ const navigation = [
 
 const userNavigation = [
   { name: "Your Profile", href: "/profile" },
-  { name: "Bingo Card", href: "#" },
+  { name: "Bingo Card", href: "/bingo" },
   { name: "Sign out", href: "/api/auth/signout" },
 ];
 
